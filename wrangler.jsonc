@@ -1,0 +1,30 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "agency-onboarding3",
+  "main": "src/worker/index.ts",
+  "compatibility_date": "2026-05-23",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "SAPT_ENDPOINT": "https://api.sapt.ai"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "LINKS","id": "55ddcf17f5ea4f3f924cdc0e1f85c648"
+    }
+  ],
+  "alias": {
+    "@/lib/sapt": "./src/lib/sapt.ts",
+    "@/lib/kv": "./src/lib/kv.ts",
+    "@/lib/types": "./src/lib/types.ts",
+    "@/lib/utils": "./src/lib/utils.ts"
+  },
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/auth/*", "/api/*"]
+  }
+}
